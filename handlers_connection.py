@@ -46,7 +46,7 @@ async def resolve_connection(ctx, connection_id: str = "") -> dict | None:
     effects=["create:connection"],
     data_model=ConnectParams
 )
-async def connect_navan(params: ConnectParams, ctx) -> ActionResult[ConnectionRecord]:
+async def connect_navan(ctx, params: ConnectParams) -> ActionResult[ConnectionRecord]:
     """Execute connect_navan lifecycle handler."""
     client = NavanClient(api_key=params.api_key, base_url=params.base_url)
     await client.verify_auth()
@@ -71,7 +71,7 @@ async def connect_navan(params: ConnectParams, ctx) -> ActionResult[ConnectionRe
     chain_callable=True,
     data_model=NoParams
 )
-async def list_connections(params: NoParams, ctx) -> ActionResult[ConnectionList]:
+async def list_connections(ctx, params: NoParams) -> ActionResult[ConnectionList]:
     """Execute list_connections lifecycle handler."""
     conns = await _load_connections(ctx)
     records = [ConnectionRecord(id=c["id"], label=c["label"], masked_key=_mask(c.get("api_key", "")), base_url=c.get("base_url", ""), is_active=c.get("is_active", False)) for c in conns]
@@ -86,7 +86,7 @@ async def list_connections(params: NoParams, ctx) -> ActionResult[ConnectionList
     effects=["delete:connection"],
     data_model=ConnectionIdParams
 )
-async def disconnect_navan(params: ConnectionIdParams, ctx) -> ActionResult[DeleteResult]:
+async def disconnect_navan(ctx, params: ConnectionIdParams) -> ActionResult[DeleteResult]:
     """Execute disconnect_navan lifecycle handler."""
     conns = await _load_connections(ctx)
     target = await resolve_connection(ctx, params.connection_id)
