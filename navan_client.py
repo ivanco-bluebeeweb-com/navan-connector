@@ -108,7 +108,8 @@ class NavanClient:
     async def get_expense(self, item_id: str) -> dict[str, Any]:
         return await self._request("GET", f"/v1/expenses/{item_id}", "get_expense")
 
-    async def create_expense(self, data: dict[str, Any]) -> dict[str, Any]:
+    async def create_expense(self, data: dict[str, Any] = None, name: str = "", details: dict[str, Any] = None, **kwargs) -> dict[str, Any]:
+        if data is None: data = {"name": name, **(details or {})}
         return await self._request("POST", "/v1/expenses", "create_expense", json_body=data)
 
     async def update_expense(self, item_id: str, data: dict[str, Any]) -> dict[str, Any]:
@@ -125,7 +126,8 @@ class NavanClient:
     async def get_card(self, item_id: str) -> dict[str, Any]:
         return await self._request("GET", f"/v1/cards/{item_id}", "get_card")
 
-    async def create_card(self, data: dict[str, Any]) -> dict[str, Any]:
+    async def create_card(self, data: dict[str, Any] = None, name: str = "", details: dict[str, Any] = None, **kwargs) -> dict[str, Any]:
+        if data is None: data = {"name": name, **(details or {})}
         return await self._request("POST", "/v1/cards", "create_card", json_body=data)
 
     async def update_card(self, item_id: str, data: dict[str, Any]) -> dict[str, Any]:
@@ -142,7 +144,8 @@ class NavanClient:
     async def get_report(self, item_id: str) -> dict[str, Any]:
         return await self._request("GET", f"/v1/reports/{item_id}", "get_report")
 
-    async def create_report(self, data: dict[str, Any]) -> dict[str, Any]:
+    async def create_report(self, data: dict[str, Any] = None, name: str = "", details: dict[str, Any] = None, **kwargs) -> dict[str, Any]:
+        if data is None: data = {"name": name, **(details or {})}
         return await self._request("POST", "/v1/reports", "create_report", json_body=data)
 
     async def update_report(self, item_id: str, data: dict[str, Any]) -> dict[str, Any]:
@@ -159,7 +162,8 @@ class NavanClient:
     async def get_policy(self, item_id: str) -> dict[str, Any]:
         return await self._request("GET", f"/v1/policies/{item_id}", "get_policy")
 
-    async def create_policy(self, data: dict[str, Any]) -> dict[str, Any]:
+    async def create_policy(self, data: dict[str, Any] = None, name: str = "", details: dict[str, Any] = None, **kwargs) -> dict[str, Any]:
+        if data is None: data = {"name": name, **(details or {})}
         return await self._request("POST", "/v1/policies", "create_policy", json_body=data)
 
     async def update_policy(self, item_id: str, data: dict[str, Any]) -> dict[str, Any]:
@@ -176,7 +180,8 @@ class NavanClient:
     async def get_merchant(self, item_id: str) -> dict[str, Any]:
         return await self._request("GET", f"/v1/merchants/{item_id}", "get_merchant")
 
-    async def create_merchant(self, data: dict[str, Any]) -> dict[str, Any]:
+    async def create_merchant(self, data: dict[str, Any] = None, name: str = "", details: dict[str, Any] = None, **kwargs) -> dict[str, Any]:
+        if data is None: data = {"name": name, **(details or {})}
         return await self._request("POST", "/v1/merchants", "create_merchant", json_body=data)
 
     async def update_merchant(self, item_id: str, data: dict[str, Any]) -> dict[str, Any]:
@@ -193,7 +198,8 @@ class NavanClient:
     async def get_reimbursement(self, item_id: str) -> dict[str, Any]:
         return await self._request("GET", f"/v1/reimbursements/{item_id}", "get_reimbursement")
 
-    async def create_reimbursement(self, data: dict[str, Any]) -> dict[str, Any]:
+    async def create_reimbursement(self, data: dict[str, Any] = None, name: str = "", details: dict[str, Any] = None, **kwargs) -> dict[str, Any]:
+        if data is None: data = {"name": name, **(details or {})}
         return await self._request("POST", "/v1/reimbursements", "create_reimbursement", json_body=data)
 
     async def update_reimbursement(self, item_id: str, data: dict[str, Any]) -> dict[str, Any]:
